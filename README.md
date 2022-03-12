@@ -1,3 +1,6 @@
+# financial-advisor-frontend
+Financial Advisor is a web application that manages helps you to guide and invest in stocks based on your personal expenditure and savings
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
