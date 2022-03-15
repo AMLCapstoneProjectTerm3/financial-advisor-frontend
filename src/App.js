@@ -1,6 +1,7 @@
 import "./App.css";
 import Login from "./components/Login";
 import SideNavBar from "./components/SideNavBar";
+import Signup from "./components/Signup";
 
 function App() {
   return (
@@ -9,7 +10,8 @@ function App() {
         <SideNavBar />
         <div className="conten flex-1">
           {/* content goes here --------------- */}
-          <Login />
+          {/* <Login /> */}
+          <Signup />
         </div>
       </div>
     </div>
