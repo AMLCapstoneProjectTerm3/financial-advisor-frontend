@@ -3,7 +3,7 @@ import React, { Component } from "react";
 export default class Logo extends Component {
   render() {
     return (
-      <div className="flex items-center space-x-1 px-2 py-3 mb-6 text-skin-light font-extrabold ">
+      <div className="flex items-center space-x-1 text-skin-light font-extrabold ">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           className="h-6 w-6"
