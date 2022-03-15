@@ -1,6 +1,5 @@
 import "./App.css";
-import Logo from "./components/Logo";
-import NavBar from "./components/NavBar";
+import Login from "./components/Login";
 import SideNavBar from "./components/SideNavBar";
 
 function App() {
@@ -8,7 +7,10 @@ function App() {
     <div className="root-body">
       <div className="relative min-h-screen sm:flex text-lg">
         <SideNavBar />
-        <div className="conten flex-1">content goes here ---------------</div>
+        <div className="conten flex-1">
+          {/* content goes here --------------- */}
+          <Login />
+        </div>
       </div>
     </div>
   );
