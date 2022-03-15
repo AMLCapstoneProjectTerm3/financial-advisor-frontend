@@ -173,10 +173,10 @@ export default function NavBar() {
               </div>
             </div>
             <div className="pt-2 px-6 space-y-6">
-              <div className="grid space-y-4">
+              <div className="bg-color-milan grid space-y-4">
                 <a
                   href="#"
-                  className="text-base font-medium text-gray-900 hover:text-gray-700"
+                  className="text-base  font-medium text-gray-900 hover:text-gray-700"
                 >
                   About Us
                 </a>
