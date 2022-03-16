@@ -6,6 +6,7 @@ import SideNavBar from "./components/SideNavBar";
 import Signup from "./components/Signup";
 import Dashboard from "./pages/Dashboard";
 import ProtectedRoute from "./ProtectedRoutes";
+import Router from "./Router"
 
 function App() {
   return (
@@ -15,15 +16,7 @@ function App() {
           <div className="relative min-h-screen sm:flex text-lg">
             <SideNavBar />
             <div className="conten flex-1">
-              <Routes>
-                <Route exact path="/login" element={<Login />} />
-                <Route exact path="/signup" element={<Signup />} />
-
-                <Route exact path="/" element={<Login />} />
-                <Route exact="/dashboard" element={<ProtectedRoute/>} >
-                  <Route exact path="/dashboard" element={<Dashboard />} />
-                </Route>
-              </Routes>
+              <Router />
             </div>
           </div>
         </div>

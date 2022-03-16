@@ -8,30 +8,30 @@ export default class Login extends Component {
           <div className="text-skin-dark text-center font-bold text-lg mb-4">Financial Advisor Login</div>
           <div className="my-4">
             <div className="mb-3">
-              <label for="email-address" class="text-xs ml-1 text-skin-dark">
+              <label htmlFor="email-address" className="text-xs ml-1 text-skin-dark">
                 Email address
               </label>
               <input
                 id="email-address"
                 name="email"
                 type="email"
-                autocomplete="email"
+                autoComplete="email"
                 required
-                class="appearance-none rounded-md relative text-xs sm:text-sm block w-full px-3 py-2 border  rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-skin-dark focus:z-10 sm:text-sm"
+                className="appearance-none rounded-md relative text-xs sm:text-sm block w-full px-3 py-2 border  rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-skin-dark focus:z-10 sm:text-sm"
                 placeholder="Email address"
               />
             </div>
             <div>
-              <label for="password" class="text-xs ml-1 text-skin-dark">
+              <label htmlFor="password" className="text-xs ml-1 text-skin-dark">
                 Password
               </label>
               <input
                 id="password"
                 name="password"
                 type="password"
-                autocomplete="current-password"
+                autoComplete="current-password"
                 required
-                class="appearance-none rounded-md relative text-xs sm:text-sm block w-full px-3 py-2 border text-skin-dark rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-skin-dark focus:z-10 "
+                className="appearance-none rounded-md relative text-xs sm:text-sm block w-full px-3 py-2 border text-skin-dark rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-skin-dark focus:z-10 "
                 placeholder="Password"
               />
             </div>
