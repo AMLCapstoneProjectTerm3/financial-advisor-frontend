@@ -15,6 +15,12 @@ module.exports = {
           button: "var(--color-button)",
           buttonhover: "var(--color-button-hover)",
         }
+      },
+      borderColor: {
+        skin: {
+          dark: "var(--color-text-dark)",
+          light: "var(--color-text-light)", 
+        }
       }
     },
   },

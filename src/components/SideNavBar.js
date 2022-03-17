@@ -9,7 +9,7 @@ export default class SideNavBar extends Component {
     return (
       <div className="sidebar flex">
         {/* -------------- Sidebar -------------- */}
-        <div id="toggle-sidebar" className="absolute inset-y-0 left-0 transition -translate-x-full sm:relative sm:translate-x-0 flex flex-col justify-between py-2 px-2 nav w-60 bg-skin-fill text-gray-100">
+        <div id="toggle-sidebar" className="z-50 absolute inset-y-0 left-0 transition -translate-x-full sm:relative sm:translate-x-0 flex flex-col justify-between py-2 px-2 nav w-60 bg-skin-fill text-gray-100">
           <div className="flex flex-col">
             <div className="px-2 py-3 mb-6">
               <Logo />
