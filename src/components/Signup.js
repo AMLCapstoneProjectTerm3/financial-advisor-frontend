@@ -16,6 +16,13 @@ export default class Signup extends Component {
     isFormValid: false,
   };
 
+  componentDidMount = () => {
+    // making sure that login screen does not appear if user is logged in and redirected to the dashboard  
+    if(JSON.parse(localStorage.getItem('token'))){
+      window.location = '/dashboard'
+    }
+  } 
+
   /**
    * Validates all form fields are present
    * @param {Object} data contains form data variables
@@ -113,6 +120,9 @@ export default class Signup extends Component {
     });
   };
 
+  /**
+   * on submit button click
+   */
   submitSignUpForm = () => {
     if (this.state.isFormValid) {
       const data = {
