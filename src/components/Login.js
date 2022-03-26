@@ -11,6 +11,14 @@ export default class Login extends Component {
     errorMessage: "",
     allRequiredFields: false
   };
+  
+  componentDidMount = () => {
+    // making sure that login screen does not appear if user is logged in and redirected to the dashboard  
+    if(JSON.parse(localStorage.getItem('token'))){
+      window.location = '/dashboard'
+    }
+  }  
+
 
   /**
    * Validates all form fields are present
@@ -48,6 +56,9 @@ export default class Login extends Component {
     });
   };
 
+  /**
+   * on subit button click
+   */
   submitLoginForm = () => {
     if (this.state.allRequiredFields) {
       const data = {
@@ -75,6 +86,7 @@ export default class Login extends Component {
       })
     }
   };
+
 
   render() {
     return (
