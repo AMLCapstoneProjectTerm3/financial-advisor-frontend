@@ -132,7 +132,7 @@ export default class Dashboard extends Component {
   onCalculate = () => {
     console.log("calculating with state", this.state)
     if(this.state.stock && this.state.stockAmount){
-      Axios("POST", API.PREDICT_STOCK, true, {
+      Axios("POST", API.PREDICT_STOCK, false, {
         riskLevel: this.state.riskLevel,
         stock: this.state.stock,
         stockAmount: this.state.stockAmount
