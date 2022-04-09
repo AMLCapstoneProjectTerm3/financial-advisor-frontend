@@ -1,16 +1,30 @@
+import Axios from "../services/axios";
 import React, { Component } from "react";
 import Logo from "./Logo";
+import { API } from "../api";
 
 export default class SideNavBar extends Component {
 
   state = {
-    isLoggedin: false
+    isLoggedin: false,
+    displayName: ""
   }
 
   componentDidMount = () => {
     if(JSON.parse(localStorage.getItem('token'))){
       this.setState({ isLoggedin: true });
     }
+
+    Axios("GET", API.USERDETAILS, true, )
+    .then((res) => {
+      console.log("res from get user details", res?.data?.Data?.displayName)
+      if(res?.data?.Data?.displayName){
+        this.setState({ displayName: res?.data?.Data?.displayName });
+      }
+    })
+    .catch((err) => {
+      console.log("error from get user details", err)
+    })
   }
 
   /**
@@ -19,11 +33,19 @@ export default class SideNavBar extends Component {
   onToggleButtonClicked = () => {
     document.getElementById('toggle-sidebar').classList.toggle('-translate-x-full')
   };
+
+  /**
+   * Logging out
+   */
+  onLogoutClicked = () => {
+    localStorage.removeItem('token')
+    window.location = '/login'
+  }
   render() {
     return (
       <div className="sidebar flex">
         {/* -------------- Sidebar -------------- */}
-        <div id="toggle-sidebar" className="z-50 absolute inset-y-0 left-0 transition -translate-x-full sm:relative sm:translate-x-0 flex flex-col justify-between py-2 nav w-60 bg-skin-fill text-gray-100">
+        <div id="toggle-sidebar" className="z-50 fixed inset-y-0 left-0 transition -translate-x-full sm:translate-x-0 flex flex-col justify-between py-2 nav w-60 bg-skin-fill text-gray-100">
           <div className="flex flex-col">
             <div className="px-3 py-3 mb-6">
               <Logo />
@@ -58,7 +80,9 @@ export default class SideNavBar extends Component {
                   d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"
                 />
               </svg>
-              <div className="">Login</div>
+              {!this.state.isLoggedin && <div className="">Login</div>}
+              {this.state.isLoggedin && <div className="" onClick={this.onLogoutClicked.bind(this)}>{this.state.displayName} <span className="text-sm">(Logout)</span></div>}
+              {/* {this.state.isLoggedin && <div className="" onClick={this.onLogoutClicked.bind(this)} >Logout</div>} */}
             </div>
           </div>
         </div>
