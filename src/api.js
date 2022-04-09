@@ -11,5 +11,6 @@ export const API = {
     LOGIN: '/login',
     SIGNUP: '/register',
     PROTECTEDTEST: '/protected',
+    PREDICT_STOCK: '/predict',
     USERDETAILS: '/userdetails'
 }
