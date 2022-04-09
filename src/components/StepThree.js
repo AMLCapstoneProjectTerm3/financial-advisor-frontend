@@ -18,10 +18,8 @@ export default class StepThree extends Component {
           </div>
           <div className="my-4">
             <div className="mb-3">
-              <select class="form-select mt-1 rounded-md relative text-xs sm:text-sm block w-full px-3 py-2 border  rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-skin-dark focus:z-10 sm:text-sm">
-                <option>High Risk</option>
-                <option>Average Risk</option>
-                <option>Low Risk</option>
+              <select onChange={this.props.onStockChange} class="form-select mt-1 rounded-md relative text-xs sm:text-sm block w-full px-3 py-2 border  rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-skin-dark focus:z-10 sm:text-sm">
+                {this.props.stocks?.map((stock)=><option value={stock?.stock}>{stock?.name}</option>)}
               </select>
             </div>
           </div>
@@ -29,7 +27,7 @@ export default class StepThree extends Component {
           <div className="mt-3">
             <button
               //   disabled={!this.state.allRequiredFields}
-              onClick={this.stepOneComplete.bind(this)}
+              onClick={this.props.onCalculate}
               className="bg-skin-button rounded-md w-full text-skin-light px-4 py-2 text-base"
             >
               Next >>>
