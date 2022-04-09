@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
 import { API } from '../api'
+import StepOne from '../components/StepOne'
+import StepThree from '../components/StepThree'
+import StepTwo from '../components/StepTwo'
 import Axios from '../services/axios'
 
 export default class Dashboard extends Component {
@@ -13,7 +16,11 @@ export default class Dashboard extends Component {
   }
   render() {
     return (
-      <div>This is Dashboard</div>
+      <div>
+        <StepOne />
+        <StepTwo />
+        <StepThree />
+      </div>
     )
   }
 }
