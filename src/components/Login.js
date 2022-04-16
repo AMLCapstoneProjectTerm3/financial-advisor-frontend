@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { API } from "../api";
 import Axios from "../services/axios";
-import axios from "../services/axios";
+import { toast } from "react-toastify";
+// import axios from "../services/axios";
 
 export default class Login extends Component {
   state = {
@@ -65,22 +66,30 @@ export default class Login extends Component {
         password: this.state.password,
         email: this.state.email,
       };
+      let loginToast = toast.loading("Logging you in ......", {position: "top-center"})
       Axios("POST", API.LOGIN, false, data)
       .then(res => {
         let data = res.data
         console.log("Login response : ", data)
         if(data.Success) {
           if(data?.Data?.token){
+            toast.update(loginToast, { position: "top-center", type: toast.TYPE.SUCCESS, autoClose: 1000, render: "Login Success!" + this.state.stock, isLoading:false })
             localStorage.setItem('token', JSON.stringify(data?.Data?.token))
             window.location = '/dashboard';
           } else {
+            // toast.update(loginToast, {position: "top-center", type: toast.TYPE.ERROR, autoClose: 5000, render: "error occured while predicting stock", isLoading:false })
+            toast.update(loginToast, {position: "top-center", type: toast.TYPE.ERROR, autoClose: 5000, render: "Couldn't log you in at this moment. Please try again later", isLoading:false })
             window.alert("Couldn't log you in at this moment. Please try again later")
           }
         } else {
+          
           if(data?.ResponseCode === 402){
             window.alert(data.ErrorMessage);
+            toast.update(loginToast, {position: "top-center", type: toast.TYPE.ERROR, autoClose: 5000, render: data.ErrorMessage, isLoading:false })
           } else {
-            window.alert("An unexpected error occurred. Please try again later.");
+            // window.alert("An unexpected error occurred. Please try again later.");
+            toast.update(loginToast, {position: "top-center", type: toast.TYPE.ERROR, autoClose: 5000, render: "An unexpected error occurred. Please try again later.", isLoading:false })
+
           }
         }
       })

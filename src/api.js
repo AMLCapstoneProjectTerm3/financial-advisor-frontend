@@ -4,7 +4,7 @@ export const URLs = {
     development: 'http://localhost:8000' 
 }
 
-export const BASE_URL = URLs.staging
+export const BASE_URL = process.env.NGROK_URL || URLs.staging
 
 export const API = {
     TEST: '/tests',
@@ -14,3 +14,5 @@ export const API = {
     PREDICT_STOCK: '/predict',
     USERDETAILS: '/userdetails'
 }
+
+// export const 

@@ -7,6 +7,8 @@ import Signup from "./components/Signup";
 import Dashboard from "./pages/Dashboard";
 import ProtectedRoute from "./ProtectedRoutes";
 import Router from "./Router"
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (
@@ -19,6 +21,7 @@ function App() {
               <Router />
             </div>
           </div>
+          <ToastContainer />
         </div>
       </Fragment>
     </BrowserRouter>
