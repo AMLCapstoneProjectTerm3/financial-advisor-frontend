@@ -5,6 +5,7 @@ export const URLs = {
 }
 
 export const BASE_URL = process.env.REACT_APP_NGROK || URLs.staging
+// export const BASE_URL = URLs.development
 
 export const API = {
     TEST: '/tests',
