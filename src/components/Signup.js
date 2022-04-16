@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { toast } from "react-toastify";
 import { API } from "../api";
 import Axios from "../services/axios";
 
@@ -131,18 +132,22 @@ export default class Signup extends Component {
         lastname: this.state.lastName,
         email: this.state.email,
       };
+      let loginToast = toast.loading("Registering as new user ......", {position: "top-center"})
       Axios("POST", API.SIGNUP, false, data)
       .then(res => {
         let data = res.data
         if(data.Success) {
           //redirect to login page due to success register
           // window.alert('Register Success')
+          toast.update(loginToast, { position: "top-center", type: toast.TYPE.SUCCESS, autoClose: 1000, render: "Register Success!" + this.state.stock, isLoading:false })
           window.location = '/login';
         } else {
           if(data?.ResponseCode === 401){
             window.alert(data.ErrorMessage);
+            toast.update(loginToast, {position: "top-center", type: toast.TYPE.ERROR, autoClose: 5000, render: data.ErrorMessage, isLoading:false })
           } else {
-            window.alert("An unexpected error occurred. Please try again later.");
+            toast.update(loginToast, {position: "top-center", type: toast.TYPE.ERROR, autoClose: 5000, render: "An unexpected error occurred. Please try again later.", isLoading:false })
+            // window.alert("An unexpected error occurred. Please try again later.");
           }
         }
       })

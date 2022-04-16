@@ -2,6 +2,7 @@ import Axios from "../services/axios";
 import React, { Component } from "react";
 import Logo from "./Logo";
 import { API } from "../api";
+import { toast } from "react-toastify";
 
 export default class SideNavBar extends Component {
 
@@ -38,8 +39,12 @@ export default class SideNavBar extends Component {
    * Logging out
    */
   onLogoutClicked = () => {
+    let loginToast = toast.success("Logout success", {position: "top-center"})
     localStorage.removeItem('token')
-    window.location = '/login'
+    
+    setTimeout(() => {
+      window.location = '/login'
+    }, 2000)
   }
   render() {
     return (
