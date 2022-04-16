@@ -188,7 +188,9 @@ export default class Dashboard extends Component {
 
   render() {
     return (
-      <div>
+      <div className="flex flex-grow flex-row">
+        <div className="w-0 h-0 sm:h-full sm:w-60"></div>
+        <div className="w-full">
         <StepOne
           stockAmount={this.state.stockAmount}
           onAmountChange={this.onAmountChange.bind(this)}
@@ -206,6 +208,7 @@ export default class Dashboard extends Component {
           <GraphDisplay stocks={this.state.graphStock} stockName={this.state.stockName}/>
         )}
         {/* <GraphDisplay stocks={this.state.graphStock}/> */}
+      </div>
       </div>
     );
   }
