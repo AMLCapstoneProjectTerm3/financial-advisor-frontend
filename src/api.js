@@ -4,8 +4,8 @@ export const URLs = {
     development: 'http://localhost:8000' 
 }
 
-// export const BASE_URL = process.env.REACT_APP_NGROK || URLs.staging
-export const BASE_URL = URLs.development
+export const BASE_URL = process.env.REACT_APP_NGROK || URLs.staging
+// export const BASE_URL = URLs.development
 
 export const API = {
     TEST: '/tests',
