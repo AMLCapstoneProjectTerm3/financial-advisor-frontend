@@ -109,6 +109,7 @@ export default class Dashboard extends Component {
   };
   componentDidMount() {
     console.log("Inside componentDidMount of DASHBOARD!");
+    console.log("Inside componentDidMount of DASHBOARD! the env variables are : ", process.env.REACT_APP_NGROK);
 
     Axios("GET", API.PROTECTEDTEST, true).then((res) => {
       console.log("Response in protected path", res);
