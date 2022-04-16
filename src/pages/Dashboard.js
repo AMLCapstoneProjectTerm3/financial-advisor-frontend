@@ -157,7 +157,7 @@ export default class Dashboard extends Component {
   onCalculate = () => {
     console.log("calculating with state", this.state);
     if (this.state.stock && this.state.stockAmount) {
-      let predictToast = toast.loading("predicting stock prices for " + this.state.stock + "......", {position: "top-center"})
+      let predictToast = toast.loading("predicting stock prices for " + STOCK_NAME_CODE_MAP.filter(a => a.stock === this.state.stock)[0]["name"] + "......", {position: "top-center"})
       Axios("POST", API.PREDICT_STOCK, false, {
         riskLevel: this.state.riskLevel,
         stock: this.state.stock,
@@ -167,7 +167,7 @@ export default class Dashboard extends Component {
           console.log("Response in predicting stock", res?.data?.Data);
           this.setState({
             graphStock: res?.data?.Data,
-            stockName: this.state.stock
+            stockName: STOCK_NAME_CODE_MAP.filter(a => a.stock === this.state.stock)[0]["name"]
           });
           toast.update(predictToast, { position: "top-center", type: toast.TYPE.SUCCESS, autoClose: 1000, render: "received prediction for stock " + this.state.stock, isLoading:false })
 
