@@ -16,7 +16,7 @@ export default class Logo extends Component {
             clipRule="evenodd"
           />
         </svg>
-        <div>Financial Advisor</div>
+        <div>Stock Price Predictor</div>
       </div>
     );
   }

@@ -102,8 +102,8 @@ const STOCK_NAME_CODE_MAP = [
 ];
 export default class Dashboard extends Component {
   state = {
-    stockAmount: 0,
-    riskLevel: 0,
+    stockAmount: 1000,
+    riskLevel: 3,
     stock: STOCK_NAME_CODE_MAP[0]["stock"],
     stockName: ""
   };
@@ -111,9 +111,9 @@ export default class Dashboard extends Component {
     console.log("Inside componentDidMount of DASHBOARD!");
     console.log("Inside componentDidMount of DASHBOARD! the env variables are : ", process.env.REACT_APP_NGROK);
 
-    Axios("GET", API.PROTECTEDTEST, true).then((res) => {
-      console.log("Response in protected path", res);
-    });
+    // Axios("GET", API.PROTECTEDTEST, true).then((res) => {
+    //   console.log("Response in protected path", res);
+    // });
 
 
 
@@ -191,14 +191,14 @@ export default class Dashboard extends Component {
       <div className="flex flex-grow flex-row">
         <div className="w-0 h-0 sm:h-full sm:w-60"></div>
         <div className="w-full">
-        <StepOne
+        {/* <StepOne
           stockAmount={this.state.stockAmount}
           onAmountChange={this.onAmountChange.bind(this)}
-        />
-        <StepTwo
+        /> */}
+        {/* <StepTwo
           riskLevel={this.state.riskLevel}
           onRiskChange={this.onRiskChange.bind(this)}
-        />
+        /> */}
         <StepThree
           onCalculate={this.onCalculate.bind(this)}
           onStockChange={this.onStockChange.bind(this)}

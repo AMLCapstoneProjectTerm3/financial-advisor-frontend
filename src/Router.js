@@ -11,15 +11,16 @@ export default class Router extends Component {
   render() {
     return (
       <Routes>
-        <Route exact path="/login" element={<Login />} />
-        <Route exact path="/signup" element={<Signup />} />
+        {/* <Route exact path="/login" element={<Login />} /> */}
+        {/* <Route exact path="/signup" element={<Signup />} /> */}
         <Route exact path="/aboutus" element={<AboutUs />} />
         <Route exact path="/contactus" element={<ContactUs />} />
+        <Route exact path="/dashboard" element={<Dashboard />} />
 
-        <Route exact path="/" element={<Login />} />
-        <Route exact="/dashboard" element={<ProtectedRoute />}>
+        <Route exact path="/" element={<Dashboard />} />
+        {/* <Route exact="/dashboard" element={<ProtectedRoute />}>
           <Route exact path="/dashboard" element={<Dashboard />} />
-        </Route>
+        </Route> */}
       </Routes>
     );
   }

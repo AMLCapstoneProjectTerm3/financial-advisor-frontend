@@ -78,7 +78,7 @@ export default class SideNavBar extends Component {
               </a>
             </div>
           </div>
-          <div className="bottom-nav py-5">
+          {/* <div className="bottom-nav py-5">
             <div className="flex space-x-1 py-3 px-3 text-skin-light cursor-pointer hover:bg-skin-filldark rounded-sm">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -96,9 +96,8 @@ export default class SideNavBar extends Component {
               </svg>
               {!this.state.isLoggedin && <div className=""  onClick={(e) => window.location = '/login'}>Login</div>}
               {this.state.isLoggedin && <div className="" onClick={this.onLogoutClicked.bind(this)}>{this.state.displayName} <span className="text-sm">(Logout)</span></div>}
-              {/* {this.state.isLoggedin && <div className="" onClick={this.onLogoutClicked.bind(this)} >Logout</div>} */}
             </div>
-          </div>
+          </div> */}
         </div>
         {/* -------------- Mobile Header -------------- */}
         <div className="sm:hidden w-full transition duration-1000 ease-in bg-skin-fill flex items-center justify-between py-2">
