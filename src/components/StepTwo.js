@@ -2,8 +2,10 @@ import React, { Component } from "react";
 
 export default class StepTwo extends Component {
   stepOneComplete = () => {
-    const anchor = document.querySelector("#stepThree");
-    anchor.scrollIntoView({ behavior: "smooth", block: "center" });
+    // const anchor = document.querySelector("#stepThree");
+    // anchor.scrollIntoView({ behavior: "smooth", block: "center" });
+
+    this.props.onRiskSubmited()
   };
 
   render() {
