@@ -15,6 +15,7 @@ export default class Router extends Component {
         <Route exact path="/signup" element={<Signup />} />
         <Route exact path="/aboutus" element={<AboutUs />} />
         <Route exact path="/contactus" element={<ContactUs />} />
+        
 
         <Route exact path="/" element={<Login />} />
         <Route exact="/dashboard" element={<ProtectedRoute />}>
