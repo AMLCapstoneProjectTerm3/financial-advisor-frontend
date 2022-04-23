@@ -143,7 +143,7 @@ export default class Signup extends Component {
           window.location = '/login';
         } else {
           if(data?.ResponseCode === 401){
-            window.alert(data.ErrorMessage);
+            // window.alert(data.ErrorMessage);
             toast.update(loginToast, {position: "top-center", type: toast.TYPE.ERROR, autoClose: 5000, render: data.ErrorMessage, isLoading:false })
           } else {
             toast.update(loginToast, {position: "top-center", type: toast.TYPE.ERROR, autoClose: 5000, render: "An unexpected error occurred. Please try again later.", isLoading:false })

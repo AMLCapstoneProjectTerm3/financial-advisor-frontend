@@ -79,12 +79,12 @@ export default class Login extends Component {
           } else {
             // toast.update(loginToast, {position: "top-center", type: toast.TYPE.ERROR, autoClose: 5000, render: "error occured while predicting stock", isLoading:false })
             toast.update(loginToast, {position: "top-center", type: toast.TYPE.ERROR, autoClose: 5000, render: "Couldn't log you in at this moment. Please try again later", isLoading:false })
-            window.alert("Couldn't log you in at this moment. Please try again later")
+            // window.alert("Couldn't log you in at this moment. Please try again later")
           }
         } else {
           
           if(data?.ResponseCode === 402){
-            window.alert(data.ErrorMessage);
+            // window.alert(data.ErrorMessage);
             toast.update(loginToast, {position: "top-center", type: toast.TYPE.ERROR, autoClose: 5000, render: data.ErrorMessage, isLoading:false })
           } else {
             // window.alert("An unexpected error occurred. Please try again later.");
