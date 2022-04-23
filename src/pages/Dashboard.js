@@ -153,6 +153,7 @@ export default class Dashboard extends Component {
         console.log("Response in protected path", stocks);
         this.setState({
           stocks,
+          stock: stocks[0]["stock"]
         });
 
         toast.update(getStocks, {
