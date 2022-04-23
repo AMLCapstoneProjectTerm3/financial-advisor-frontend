@@ -18,13 +18,15 @@ export default class StepOne extends Component {
             <div className="mb-3">
               <input
                 id="capital"
-                name="capital"
+                name=""
                 type="number"
                 required
                 className="appearance-none rounded-md relative text-xs sm:text-sm block w-full px-3 py-2 border  rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-skin-dark focus:z-10 sm:text-sm"
                 placeholder="Enter Amount"
                 // onChange={this.changeFormValues.bind(this)}
                 // value={this.state.email}
+                // value={this.props?.stockAmount}
+                onChange={this.props.onAmountChange}
                 onFocus={(e) => this.setState({ isError: false })}
               />
             </div>

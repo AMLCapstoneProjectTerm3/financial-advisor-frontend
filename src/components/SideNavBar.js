@@ -2,6 +2,7 @@ import Axios from "../services/axios";
 import React, { Component } from "react";
 import Logo from "./Logo";
 import { API } from "../api";
+import { toast } from "react-toastify";
 
 export default class SideNavBar extends Component {
 
@@ -11,6 +12,7 @@ export default class SideNavBar extends Component {
   }
 
   componentDidMount = () => {
+    console.log("component did mounted for login")
     if(JSON.parse(localStorage.getItem('token'))){
       this.setState({ isLoggedin: true });
     }
@@ -23,6 +25,10 @@ export default class SideNavBar extends Component {
       }
     })
     .catch((err) => {
+      console.log(err.json())
+      if(err.details){
+        console.log(err)
+      }
       console.log("error from get user details", err)
     })
   }
@@ -37,9 +43,17 @@ export default class SideNavBar extends Component {
   /**
    * Logging out
    */
-  onLogoutClicked = () => {
+  onLogoutClicked = (e) => {
+    // e.preventdefault()
+    let loginToast = toast.success("Logout success", {position: "top-center"})
     localStorage.removeItem('token')
-    window.location = '/login'
+    console.log("logging you out")
+    setTimeout(() => {
+      console.log("accessing /login")
+
+      window.location = '/login'
+    }, 1000)
+    
   }
   render() {
     return (
@@ -65,7 +79,7 @@ export default class SideNavBar extends Component {
             </div>
           </div>
           <div className="bottom-nav py-5">
-            <div className="flex space-x-1 py-3 px-3 text-skin-light cursor-pointer hover:bg-skin-filldark rounded-sm" onClick={(e) => window.location = '/login'}>
+            <div className="flex space-x-1 py-3 px-3 text-skin-light cursor-pointer hover:bg-skin-filldark rounded-sm">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-6 w-6"
@@ -80,7 +94,7 @@ export default class SideNavBar extends Component {
                   d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"
                 />
               </svg>
-              {!this.state.isLoggedin && <div className="">Login</div>}
+              {!this.state.isLoggedin && <div className=""  onClick={(e) => window.location = '/login'}>Login</div>}
               {this.state.isLoggedin && <div className="" onClick={this.onLogoutClicked.bind(this)}>{this.state.displayName} <span className="text-sm">(Logout)</span></div>}
               {/* {this.state.isLoggedin && <div className="" onClick={this.onLogoutClicked.bind(this)} >Logout</div>} */}
             </div>
