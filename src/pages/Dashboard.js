@@ -103,37 +103,17 @@ const STOCK_NAME_CODE_MAP = [
 export default class Dashboard extends Component {
   state = {
     stockAmount: 0,
-    riskLevel: 0,
+    riskLevel: 3,
     stock: STOCK_NAME_CODE_MAP[0]["stock"],
-    stockName: ""
+    stockName: "",
+    stocks: null,
   };
   componentDidMount() {
     console.log("Inside componentDidMount of DASHBOARD!");
-    console.log("Inside componentDidMount of DASHBOARD! the env variables are : ", process.env.REACT_APP_NGROK);
-
-    Axios("GET", API.PROTECTEDTEST, true).then((res) => {
-      console.log("Response in protected path", res);
-    });
-
-
-
-  //   const options = {
-  //     method: 'GET',
-  //     url: 'https://apistocks.p.rapidapi.com/daily',
-  //     params: {symbol: 'AAPL', dateStart: '1997-05-23', dateEnd: '2022-04-14'},
-  //     headers: {
-  //       'X-RapidAPI-Host': 'apistocks.p.rapidapi.com',
-  //       'X-RapidAPI-Key': 'b4295173d6msh61386ae51a4824ap18068ejsnd02afc62eb9d'
-  //     }
-  //   };
-    
-  //   axios.request(options).then(function (response) {
-  //     console.log("Stocks API")
-  //     console.log(response.data);
-  //   }).catch(function (error) {
-  //     console.error(error);
-  //   });
-  
+    console.log(
+      "Inside componentDidMount of DASHBOARD! the env variables are : ",
+      process.env.REACT_APP_NGROK
+    );
   }
 
   onStockChange = (e) => {
@@ -154,10 +134,62 @@ export default class Dashboard extends Component {
     }
   };
 
+  onRiskSubmited = () => {
+    if (this.state.riskLevel && this.state.stockAmount) {
+
+      let getStocks = toast.loading(
+        "Fetching stocks for your amount and risk",
+        { position: "top-center" }
+      );
+
+      Axios("POST", API.GET_STOCKS, false, {
+        riskLevel: parseInt(this.state.riskLevel),
+        investmentAmount: this.state.stockAmount,
+      }).then((res) => {
+        let stocks = res?.data?.stocksList;
+        stocks = stocks.map((a) =>
+          STOCK_NAME_CODE_MAP.find((b) => b.stock === a)
+        );
+        console.log("Response in protected path", stocks);
+        this.setState({
+          stocks,
+        });
+
+        toast.update(getStocks, {
+          position: "top-center",
+          type: toast.TYPE.SUCCESS,
+          autoClose: 1000,
+          render: "received stock list!",
+          isLoading: false,
+        });
+
+        setTimeout(() => {
+          const anchor = document.querySelector("#stepThree");
+          anchor.scrollIntoView({ behavior: "smooth", block: "center" });
+        }, 1000)
+      }).catch(err => {
+        toast.update(getStocks, {
+          position: "top-center",
+          type: toast.TYPE.ERROR,
+          autoClose: 1000,
+          render: "received stock list failed!",
+          isLoading: false,
+        });
+      })
+    }
+  };
+
   onCalculate = () => {
     console.log("calculating with state", this.state);
     if (this.state.stock && this.state.stockAmount) {
-      let predictToast = toast.loading("predicting stock prices for " + this.state.stock + "......", {position: "top-center"})
+      let predictToast = toast.loading(
+        "predicting stock prices for " +
+          STOCK_NAME_CODE_MAP.filter((a) => a.stock === this.state.stock)[0][
+            "name"
+          ] +
+          "......",
+        { position: "top-center" }
+      );
       Axios("POST", API.PREDICT_STOCK, false, {
         riskLevel: this.state.riskLevel,
         stock: this.state.stock,
@@ -167,21 +199,32 @@ export default class Dashboard extends Component {
           console.log("Response in predicting stock", res?.data?.Data);
           this.setState({
             graphStock: res?.data?.Data,
-            stockName: this.state.stock
+            stockName: STOCK_NAME_CODE_MAP.filter(
+              (a) => a.stock === this.state.stock
+            )[0]["name"],
           });
-          toast.update(predictToast, { position: "top-center", type: toast.TYPE.SUCCESS, autoClose: 1000, render: "received prediction for stock " + this.state.stock, isLoading:false })
-
+          toast.update(predictToast, {
+            position: "top-center",
+            type: toast.TYPE.SUCCESS,
+            autoClose: 1000,
+            render: "received prediction for stock " + this.state.stock,
+            isLoading: false,
+          });
 
           setTimeout(() => {
             const anchor = document.querySelector("#graphDisplay");
             anchor.scrollIntoView({ behavior: "smooth", block: "center" });
-          }, 1000)
-          
+          }, 1000);
         })
         .catch((err) => {
           console.log("error occured while predicting stock", err);
-          toast.update(predictToast, {position: "top-center", type: toast.TYPE.ERROR, autoClose: 5000, render: "error occured while predicting stock", isLoading:false })
-
+          toast.update(predictToast, {
+            position: "top-center",
+            type: toast.TYPE.ERROR,
+            autoClose: 5000,
+            render: "error occured while predicting stock",
+            isLoading: false,
+          });
         });
     }
   };
@@ -191,24 +234,30 @@ export default class Dashboard extends Component {
       <div className="flex flex-grow flex-row">
         <div className="w-0 h-0 sm:h-full sm:w-60"></div>
         <div className="w-full">
-        <StepOne
-          stockAmount={this.state.stockAmount}
-          onAmountChange={this.onAmountChange.bind(this)}
-        />
-        <StepTwo
-          riskLevel={this.state.riskLevel}
-          onRiskChange={this.onRiskChange.bind(this)}
-        />
-        <StepThree
-          onCalculate={this.onCalculate.bind(this)}
-          onStockChange={this.onStockChange.bind(this)}
-          stocks={STOCK_NAME_CODE_MAP}
-        />
-        {this.state.graphStock && (
-          <GraphDisplay stocks={this.state.graphStock} stockName={this.state.stockName}/>
-        )}
-        {/* <GraphDisplay stocks={this.state.graphStock}/> */}
-      </div>
+          <StepOne
+            stockAmount={this.state.stockAmount}
+            onAmountChange={this.onAmountChange.bind(this)}
+          />
+          <StepTwo
+            riskLevel={this.state.riskLevel}
+            onRiskChange={this.onRiskChange.bind(this)}
+            onRiskSubmited={this.onRiskSubmited.bind(this)}
+          />
+          {this.state.stocks && (
+            <StepThree
+              onCalculate={this.onCalculate.bind(this)}
+              onStockChange={this.onStockChange.bind(this)}
+              stocks={this.state.stocks}
+            />
+          )}
+          {this.state.graphStock && (
+            <GraphDisplay
+              stocks={this.state.graphStock}
+              stockName={this.state.stockName}
+            />
+          )}
+          {/* <GraphDisplay stocks={this.state.graphStock}/> */}
+        </div>
       </div>
     );
   }
