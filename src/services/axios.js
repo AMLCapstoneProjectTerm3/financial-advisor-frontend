@@ -23,6 +23,8 @@ const Axios = async (Method, URL, isPrivate, data = {}) => {
       if (Method !== "GET") {
         Object.assign(config, { data: data });
       }
+
+      console.log("config: " , config);
       return await axios(config);
     }
   } else {
